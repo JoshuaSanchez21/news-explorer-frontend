@@ -1,0 +1,37 @@
+.about {
+  width: min(100% - 80px, 1232px);
+  margin: 0 auto;
+
+  padding: 80px 0;
+
+  display: grid;
+  grid-template-columns: 464px 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.about__image {
+  width: 464px;
+  height: 464px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.about__content {
+  max-width: 600px;
+}
+
+.about__title {
+  margin: 0;
+
+  font-family: "Roboto Slab", Georgia, serif;
+  font-size: 40px;
+  font-weight: 400;
+}
+
+.about__text {
+  margin: 24px 0 0;
+
+  font-size: 18px;
+  line-height: 1.35;
+}

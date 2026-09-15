@@ -1,0 +1,21 @@
+.header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header__container {
+  width: min(100% - 80px, 1232px);
+  margin: 0 auto;
+  min-height: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  color: #fff;
+  font-family: "Roboto Slab", Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+}

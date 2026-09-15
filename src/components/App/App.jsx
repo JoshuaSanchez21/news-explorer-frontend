@@ -1,9 +1,10 @@
 import "./App.css";
+import Main from "../Main/Main.jsx";
 
 function App() {
   return (
     <div className="page">
-      <h1 className="page__title">News Explorer</h1>
+      <Main />
     </div>
   );
 }
