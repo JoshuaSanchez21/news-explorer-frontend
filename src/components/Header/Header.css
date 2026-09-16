@@ -20,6 +20,22 @@
   text-decoration: none;
 }
 
+.header_theme_light .header__logo {
+  color: #fff;
+}
+
+.header_theme_dark {
+  border-bottom: 1px solid #d1d2d6;
+}
+
+.header_theme_dark .header__logo {
+  color: #1a1b22;
+}
+
+.header_theme_dark .header__menu-button {
+  color: #1a1b22;
+}
+
 @media screen and (max-width: 1023px) and (min-width: 768px) {
   .header__container {
     width: calc(100% - 80px);
@@ -94,7 +110,8 @@
     line-height: 1;
   }
 
-  .header_menu-open {
-    background-color: #1a1b22;
+  .header_menu-open .header__logo,
+  .header_menu-open .header__menu-button {
+    color: #fff;
   }
 }

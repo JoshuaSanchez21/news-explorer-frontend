@@ -1,20 +1,29 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import Navigation from "../Navigation/Navigation.jsx";
 
-function Header() {
+function Header({ theme = "light" }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function handleMenuToggle() {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((current) => !current);
   }
 
   return (
-    <header className={`header ${isMenuOpen ? "header_menu-open" : ""}`}>
+    <header
+      className={`header header_theme_${theme} ${
+        isMenuOpen ? "header_menu-open" : ""
+      }`}
+    >
       <div className="header__container">
-        <a className="header__logo" href="/">
+        <Link
+          className="header__logo"
+          to="/"
+          onClick={() => setIsMenuOpen(false)}
+        >
           NewsExplorer
-        </a>
+        </Link>
 
         <button
           className="header__menu-button"
@@ -25,14 +34,16 @@ function Header() {
           <span className="header__menu-icon">{isMenuOpen ? "×" : "☰"}</span>
         </button>
 
-        <Navigation isMenuOpen={isMenuOpen} />
-        {isMenuOpen && (
-          <div
-            className="header__overlay"
-            onClick={() => setIsMenuOpen(false)}
-          />
-        )}
+        <Navigation
+          theme={theme}
+          isMenuOpen={isMenuOpen}
+          onNavigate={() => setIsMenuOpen(false)}
+        />
       </div>
+
+      {isMenuOpen && (
+        <div className="header__overlay" onClick={() => setIsMenuOpen(false)} />
+      )}
     </header>
   );
 }

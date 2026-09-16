@@ -1,11 +1,32 @@
+import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 
-function Navigation({ isMenuOpen }) {
+function Navigation({ theme = "light", isMenuOpen, onNavigate }) {
   return (
-    <nav className={`navigation ${isMenuOpen ? "navigation_mobile-open" : ""}`}>
-      <a className="navigation__link navigation__link_active" href="/">
+    <nav
+      className={`navigation navigation_theme_${theme} ${
+        isMenuOpen ? "navigation_mobile-open" : ""
+      }`}
+    >
+      <NavLink
+        className={({ isActive }) =>
+          `navigation__link ${isActive ? "navigation__link_active" : ""}`
+        }
+        to="/"
+        onClick={onNavigate}
+      >
         Inicio
-      </a>
+      </NavLink>
+
+      <NavLink
+        className={({ isActive }) =>
+          `navigation__link ${isActive ? "navigation__link_active" : ""}`
+        }
+        to="/saved-news"
+        onClick={onNavigate}
+      >
+        Artículos guardados
+      </NavLink>
 
       <button className="navigation__login-button" type="button">
         Iniciar sesión

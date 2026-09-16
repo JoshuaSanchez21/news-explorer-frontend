@@ -8,7 +8,7 @@ function SavedNews() {
   return (
     <main className="saved-news">
       <div className="saved-news__header">
-        <Header />
+        <Header theme="dark" />
       </div>
 
       <SavedNewsHeader />

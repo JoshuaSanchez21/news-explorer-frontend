@@ -85,7 +85,7 @@ function Main() {
   return (
     <main className="main">
       <section className="main__hero">
-        <Header />
+        <Header theme="light" />
 
         <div className="main__hero-content">
           <h1 className="main__title">
