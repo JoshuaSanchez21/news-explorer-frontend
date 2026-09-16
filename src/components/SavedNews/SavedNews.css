@@ -1,0 +1,31 @@
+.saved-news {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #fff;
+}
+
+.saved-news__header {
+  background-color: #fff;
+}
+
+.saved-news__articles {
+  flex: 1;
+
+  min-height: 300px;
+  padding: 80px 16px;
+
+  background-color: #f5f6f7;
+
+  text-align: center;
+}
+
+.saved-news__empty {
+  margin: 0;
+
+  color: #b6bcbf;
+
+  font-size: 18px;
+}
