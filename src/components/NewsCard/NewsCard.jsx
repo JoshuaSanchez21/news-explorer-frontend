@@ -10,7 +10,7 @@ function formatDate(dateString) {
   }).format(date);
 }
 
-function NewsCard({ article }) {
+function NewsCard({ article, isSaved = false, onDelete }) {
   function handleSaveClick(event) {
     event.stopPropagation();
     event.preventDefault();
@@ -25,6 +25,10 @@ function NewsCard({ article }) {
         rel="noreferrer"
       >
         <div className="news-card__image-container">
+          {isSaved && article.keyword && (
+            <span className="news-card__keyword">{article.keyword}</span>
+          )}
+
           {article.urlToImage && (
             <img
               className="news-card__image"
@@ -33,25 +37,47 @@ function NewsCard({ article }) {
             />
           )}
 
-          <div className="news-card__save-container">
-            <span className="news-card__tooltip">
-              Inicia sesión para guardar artículos
-            </span>
+          <div className="news-card__action-container">
+            {!isSaved && (
+              <>
+                <span className="news-card__tooltip">
+                  Inicia sesión para guardar artículos
+                </span>
 
-            <button
-              className="news-card__save-button"
-              type="button"
-              aria-label="Guardar artículo"
-              onClick={handleSaveClick}
-            >
-              <svg
-                className="news-card__save-icon"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
+                <button
+                  className="news-card__save-button"
+                  type="button"
+                  aria-label="Guardar artículo"
+                  onClick={handleSaveClick}
+                >
+                  <svg
+                    className="news-card__save-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M6.5 4.75C6.5 3.78 7.28 3 8.25 3h7.5c.97 0 1.75.78 1.75 1.75v15.1a.5.5 0 0 1-.78.42L12 17.12l-4.72 3.15a.5.5 0 0 1-.78-.42V4.75Z" />
+                  </svg>
+                </button>
+              </>
+            )}
+
+            {isSaved && (
+              <button
+                className="news-card__delete-button"
+                type="button"
+                aria-label="Eliminar artículo guardado"
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+
+                  if (onDelete) {
+                    onDelete(article);
+                  }
+                }}
               >
-                <path d="M6.5 4.75C6.5 3.78 7.28 3 8.25 3h7.5c.97 0 1.75.78 1.75 1.75v15.1a.5.5 0 0 1-.78.42L12 17.12l-4.72 3.15a.5.5 0 0 1-.78-.42V4.75Z" />
-              </svg>
-            </button>
+                <span className="news-card__delete-icon" />
+              </button>
+            )}
           </div>
         </div>
 
