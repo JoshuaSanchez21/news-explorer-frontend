@@ -37,6 +37,24 @@
   line-height: 1.35;
 }
 
+.main__error {
+  padding: 80px 16px;
+
+  background-color: #f5f6f7;
+
+  text-align: center;
+}
+
+.main__error-text {
+  max-width: 600px;
+  margin: 0 auto;
+
+  color: #b6bcbf;
+
+  font-size: 18px;
+  line-height: 24px;
+}
+
 @media screen and (max-width: 1023px) and (min-width: 768px) {
   .main__hero {
     min-height: 400px;

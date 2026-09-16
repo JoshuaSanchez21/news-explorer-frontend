@@ -1,10 +1,44 @@
+import { useState } from "react";
 import "./Main.css";
+
 import Header from "../Header/Header.jsx";
 import SearchForm from "../SearchForm/SearchForm.jsx";
 import About from "../About/About.jsx";
 import Footer from "../Footer/Footer.jsx";
+import Preloader from "../Preloader/Preloader.jsx";
+import NewsCardList from "../NewsCardList/NewsCardList.jsx";
+import NothingFound from "../NothingFound/NothingFound.jsx";
+
+import { getNews } from "../../utils/NewsApi.js";
 
 function Main() {
+  const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [searchError, setSearchError] = useState("");
+
+  function handleSearch(keyword) {
+    setIsLoading(true);
+    setHasSearched(true);
+    setSearchError("");
+    setArticles([]);
+
+    getNews(keyword)
+      .then((data) => {
+        setArticles(data.articles || []);
+      })
+      .catch((error) => {
+        console.error(error);
+
+        setSearchError(
+          "Lo sentimos, algo ha salido mal durante la solicitud. Es posible que haya un problema de conexión o que el servidor no funcione. Por favor, inténtalo más tarde.",
+        );
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
   return (
     <main className="main">
       <section className="main__hero">
@@ -22,9 +56,25 @@ function Main() {
             tu cuenta personal.
           </p>
 
-          <SearchForm />
+          <SearchForm onSearch={handleSearch} />
         </div>
       </section>
+
+      {isLoading && <Preloader />}
+
+      {!isLoading && hasSearched && !searchError && articles.length === 0 && (
+        <NothingFound />
+      )}
+
+      {!isLoading && !searchError && articles.length > 0 && (
+        <NewsCardList articles={articles} />
+      )}
+
+      {searchError && (
+        <section className="main__error">
+          <p className="main__error-text">{searchError}</p>
+        </section>
+      )}
 
       <About />
       <Footer />

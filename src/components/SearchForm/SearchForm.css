@@ -58,6 +58,20 @@
   background-color: #2a65cc;
 }
 
+.search-form__field {
+  width: 100%;
+}
+
+.search-form__error {
+  position: absolute;
+  top: 72px;
+  left: 24px;
+
+  color: #ff0000;
+
+  font-size: 14px;
+}
+
 @media screen and (max-width: 1023px) and (min-width: 768px) {
   .search-form {
     margin-top: 24px;
@@ -101,5 +115,14 @@
     height: 56px;
 
     font-size: 18px;
+  }
+
+  .search-form__field {
+    position: relative;
+  }
+
+  .search-form__error {
+    top: 60px;
+    left: 16px;
   }
 }
