@@ -3,7 +3,9 @@ import "./NothingFound.css";
 function NothingFound() {
   return (
     <section className="nothing-found">
-      <div className="nothing-found__icon" />
+      <div className="nothing-found__icon" aria-hidden="true">
+        <div className="nothing-found__circle" />
+      </div>
 
       <h2 className="nothing-found__title">No se ha encontrado nada</h2>
 
