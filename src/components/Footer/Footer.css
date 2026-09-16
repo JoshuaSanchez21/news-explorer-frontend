@@ -68,3 +68,30 @@
 
   fill: #1a1b22;
 }
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .footer {
+    width: calc(100% - 80px);
+    min-height: 64px;
+  }
+
+  .footer__copyright {
+    font-size: 14px;
+  }
+
+  .footer__content {
+    gap: 24px;
+  }
+
+  .footer__navigation {
+    gap: 16px;
+  }
+
+  .footer__link {
+    font-size: 16px;
+  }
+
+  .footer__social {
+    gap: 24px;
+  }
+}

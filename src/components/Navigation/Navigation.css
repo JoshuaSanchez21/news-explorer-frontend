@@ -38,3 +38,21 @@
 .navigation__login-button:hover {
   opacity: 0.85;
 }
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .navigation {
+    gap: 16px;
+  }
+
+  .navigation__link {
+    font-size: 16px;
+  }
+
+  .navigation__login-button {
+    min-width: 152px;
+    min-height: 40px;
+    padding: 0 16px;
+
+    font-size: 16px;
+  }
+}

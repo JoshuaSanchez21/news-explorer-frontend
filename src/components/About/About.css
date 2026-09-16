@@ -35,3 +35,31 @@
   font-size: 18px;
   line-height: 1.35;
 }
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .about {
+    width: calc(100% - 80px);
+
+    padding: 40px 0;
+
+    grid-template-columns: 232px 1fr;
+    gap: 32px;
+  }
+
+  .about__image {
+    width: 232px;
+    height: 232px;
+  }
+
+  .about__title {
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .about__text {
+    margin-top: 16px;
+
+    font-size: 16px;
+    line-height: 1.3;
+  }
+}

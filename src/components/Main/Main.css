@@ -36,3 +36,26 @@
   font-size: 18px;
   line-height: 1.35;
 }
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .main__hero {
+    min-height: 400px;
+  }
+
+  .main__hero-content {
+    width: 452px;
+    padding-top: 38px;
+  }
+
+  .main__title {
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  .main__subtitle {
+    margin-top: 16px;
+
+    font-size: 18px;
+    line-height: 24px;
+  }
+}

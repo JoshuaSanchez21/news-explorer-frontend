@@ -57,3 +57,21 @@
 .search-form__button:active {
   background-color: #2a65cc;
 }
+
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .search-form {
+    margin-top: 24px;
+  }
+
+  .search-form__input {
+    height: 56px;
+    padding: 0 176px 0 24px;
+  }
+
+  .search-form__button {
+    width: 160px;
+    height: 56px;
+
+    font-size: 16px;
+  }
+}
