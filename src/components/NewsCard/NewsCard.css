@@ -135,6 +135,16 @@
   display: block;
 }
 
+.news-card__link {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  color: inherit;
+  text-decoration: none;
+}
+
 @media screen and (max-width: 1023px) and (min-width: 768px) {
   .news-card__image {
     height: 150px;

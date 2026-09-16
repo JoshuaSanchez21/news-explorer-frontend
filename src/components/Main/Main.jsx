@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Main.css";
 
 import Header from "../Header/Header.jsx";
@@ -16,16 +16,59 @@ function Main() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [searchError, setSearchError] = useState("");
+  const [lastKeyword, setLastKeyword] = useState("");
+
+  useEffect(() => {
+    const storedArticles = localStorage.getItem("newsExplorerArticles");
+
+    const storedKeyword = localStorage.getItem("newsExplorerKeyword");
+
+    if (storedArticles) {
+      try {
+        const parsedArticles = JSON.parse(storedArticles);
+
+        setArticles(parsedArticles);
+
+        if (parsedArticles.length > 0) {
+          setHasSearched(true);
+        }
+      } catch (error) {
+        console.error(
+          "No se pudieron recuperar los artículos guardados:",
+          error,
+        );
+
+        localStorage.removeItem("newsExplorerArticles");
+      }
+    }
+
+    if (storedKeyword) {
+      setLastKeyword(storedKeyword);
+    }
+  }, []);
 
   function handleSearch(keyword) {
     setIsLoading(true);
     setHasSearched(true);
     setSearchError("");
     setArticles([]);
+    setLastKeyword(keyword);
+
+    localStorage.removeItem("newsExplorerArticles");
+    localStorage.removeItem("newsExplorerKeyword");
 
     getNews(keyword)
       .then((data) => {
-        setArticles(data.articles || []);
+        const receivedArticles = data.articles || [];
+
+        setArticles(receivedArticles);
+
+        localStorage.setItem(
+          "newsExplorerArticles",
+          JSON.stringify(receivedArticles),
+        );
+
+        localStorage.setItem("newsExplorerKeyword", keyword);
       })
       .catch((error) => {
         console.error(error);
