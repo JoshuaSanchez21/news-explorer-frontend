@@ -75,3 +75,31 @@
     font-size: 16px;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    margin-top: 48px;
+  }
+
+  .search-form__input {
+    width: 100%;
+    height: 56px;
+
+    padding: 0 16px;
+
+    border-radius: 100px;
+  }
+
+  .search-form__button {
+    position: static;
+
+    width: 100%;
+    height: 56px;
+
+    font-size: 18px;
+  }
+}

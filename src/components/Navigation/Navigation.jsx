@@ -1,8 +1,8 @@
 import "./Navigation.css";
 
-function Navigation() {
+function Navigation({ isMenuOpen }) {
   return (
-    <nav className="navigation">
+    <nav className={`navigation ${isMenuOpen ? "navigation_mobile-open" : ""}`}>
       <a className="navigation__link navigation__link_active" href="/">
         Inicio
       </a>

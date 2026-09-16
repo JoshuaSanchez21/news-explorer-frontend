@@ -56,3 +56,37 @@
     font-size: 16px;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .navigation {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    z-index: 11;
+
+    display: none;
+
+    width: 100%;
+    padding: 16px 16px 24px;
+
+    background-color: #1a1b22;
+  }
+
+  .navigation_mobile-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+  }
+
+  .navigation__link {
+    font-size: 18px;
+  }
+
+  .navigation__login-button {
+    width: 100%;
+    min-height: 56px;
+
+    font-size: 18px;
+  }
+}
