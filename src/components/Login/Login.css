@@ -74,3 +74,49 @@
 
   cursor: pointer;
 }
+
+.auth-form__label {
+  position: relative;
+}
+
+.auth-form__error {
+  min-height: 14px;
+  margin-top: 4px;
+
+  color: #ff0000;
+
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.auth-form__input_error {
+  border-bottom-color: #ff0000;
+}
+
+.auth-form__server-error {
+  margin: 0 0 8px;
+
+  color: #ff0000;
+
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+
+  text-align: center;
+}
+
+.auth-form__submit:disabled {
+  background-color: #e6e8eb;
+  color: #b6bcbf;
+
+  cursor: default;
+}
+
+.auth-form__submit:not(:disabled):hover {
+  background-color: #347eff;
+}
+
+.auth-form__submit:not(:disabled):active {
+  background-color: #2a65cc;
+}
