@@ -1,29 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm.jsx";
 import useFormWithValidation from "../../hooks/useFormWithValidation.js";
 import "./Register.css";
 
-function Register({ isOpen, onClose, onLoginClick }) {
-  const { values, errors, isValid, handleChange, resetForm } =
-    useFormWithValidation({
-      email: "",
-      password: "",
-      name: "",
-    });
+function Register({ isOpen, onClose, onLoginClick, onSuccess }) {
+  const { values, errors, isValid, handleChange } = useFormWithValidation({
+    email: "",
+    password: "",
+    name: "",
+  });
 
   const [serverError, setServerError] = useState("");
-
-  useEffect(() => {
-    if (isOpen) {
-      resetForm({
-        email: "",
-        password: "",
-        name: "",
-      });
-
-      setServerError("");
-    }
-  }, [isOpen]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -32,7 +19,15 @@ function Register({ isOpen, onClose, onLoginClick }) {
       return;
     }
 
-    console.log("Register:", values);
+    setServerError("");
+
+    // Temporal hasta conectar POST /signup
+    if (values.email.toLowerCase() === "existing@example.com") {
+      setServerError("Este correo electrónico no está disponible");
+      return;
+    }
+
+    onSuccess();
   }
 
   return (

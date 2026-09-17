@@ -1,27 +1,12 @@
-import { useEffect, useState } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm.jsx";
 import useFormWithValidation from "../../hooks/useFormWithValidation.js";
 import "./Login.css";
 
 function Login({ isOpen, onClose, onRegisterClick }) {
-  const { values, errors, isValid, handleChange, resetForm } =
-    useFormWithValidation({
-      email: "",
-      password: "",
-    });
-
-  const [serverError, setServerError] = useState("");
-
-  useEffect(() => {
-    if (isOpen) {
-      resetForm({
-        email: "",
-        password: "",
-      });
-
-      setServerError("");
-    }
-  }, [isOpen]);
+  const { values, errors, isValid, handleChange } = useFormWithValidation({
+    email: "",
+    password: "",
+  });
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -67,10 +52,6 @@ function Login({ isOpen, onClose, onRegisterClick }) {
           />
           <span className="auth-form__error">{errors.password}</span>
         </label>
-
-        {serverError && (
-          <p className="auth-form__server-error">{serverError}</p>
-        )}
 
         <button className="auth-form__submit" type="submit" disabled={!isValid}>
           Iniciar sesión

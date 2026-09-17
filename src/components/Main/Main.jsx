@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Main.css";
 
 import Header from "../Header/Header.jsx";
@@ -12,47 +12,42 @@ import NothingFound from "../NothingFound/NothingFound.jsx";
 import { getNews } from "../../utils/NewsApi.js";
 
 function Main({ onLoginClick }) {
-  const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasSearched, setHasSearched] = useState(false);
-  const [searchError, setSearchError] = useState("");
-  const [lastKeyword, setLastKeyword] = useState("");
-
-  useEffect(() => {
+  const [articles, setArticles] = useState(() => {
     const storedArticles = localStorage.getItem("newsExplorerArticles");
 
-    const storedKeyword = localStorage.getItem("newsExplorerKeyword");
-
-    if (storedArticles) {
-      try {
-        const parsedArticles = JSON.parse(storedArticles);
-
-        setArticles(parsedArticles);
-
-        if (parsedArticles.length > 0) {
-          setHasSearched(true);
-        }
-      } catch (error) {
-        console.error(
-          "No se pudieron recuperar los artículos guardados:",
-          error,
-        );
-
-        localStorage.removeItem("newsExplorerArticles");
-      }
+    if (!storedArticles) {
+      return [];
     }
 
-    if (storedKeyword) {
-      setLastKeyword(storedKeyword);
+    try {
+      return JSON.parse(storedArticles);
+    } catch (error) {
+      console.error("No se pudieron recuperar los artículos guardados:", error);
+
+      localStorage.removeItem("newsExplorerArticles");
+
+      return [];
     }
-  }, []);
+  });
+
+  const [currentSearch, setCurrentSearch] = useState(
+    () => localStorage.getItem("newsExplorerKeyword") || "",
+  );
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [hasSearched, setHasSearched] = useState(() =>
+    Boolean(localStorage.getItem("newsExplorerKeyword")),
+  );
+
+  const [searchError, setSearchError] = useState("");
 
   function handleSearch(keyword) {
     setIsLoading(true);
     setHasSearched(true);
     setSearchError("");
     setArticles([]);
-    setLastKeyword(keyword);
+    setCurrentSearch(keyword);
 
     localStorage.removeItem("newsExplorerArticles");
     localStorage.removeItem("newsExplorerKeyword");
@@ -110,7 +105,7 @@ function Main({ onLoginClick }) {
       )}
 
       {!isLoading && !searchError && articles.length > 0 && (
-        <NewsCardList articles={articles} />
+        <NewsCardList key={currentSearch} articles={articles} />
       )}
 
       {searchError && (

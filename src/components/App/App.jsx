@@ -7,6 +7,8 @@ import SavedNews from "../SavedNews/SavedNews.jsx";
 import Login from "../Login/Login.jsx";
 import Register from "../Register/Register.jsx";
 
+import InfoTooltip from "../InfoTooltip/InfoTooltip.jsx";
+
 function App() {
   const [activeModal, setActiveModal] = useState(null);
 
@@ -16,6 +18,10 @@ function App() {
 
   function handleRegisterClick() {
     setActiveModal("register");
+  }
+
+  function handleRegistrationSuccess() {
+    setActiveModal("success");
   }
 
   function closeAllPopups() {
@@ -33,17 +39,30 @@ function App() {
         />
       </Routes>
 
-      <Login
-        isOpen={activeModal === "login"}
-        onClose={closeAllPopups}
-        onRegisterClick={handleRegisterClick}
-      />
+      {activeModal === "login" && (
+        <Login
+          isOpen
+          onClose={closeAllPopups}
+          onRegisterClick={handleRegisterClick}
+        />
+      )}
 
-      <Register
-        isOpen={activeModal === "register"}
-        onClose={closeAllPopups}
-        onLoginClick={handleLoginClick}
-      />
+      {activeModal === "register" && (
+        <Register
+          isOpen
+          onClose={closeAllPopups}
+          onLoginClick={handleLoginClick}
+          onSuccess={handleRegistrationSuccess}
+        />
+      )}
+
+      {activeModal === "success" && (
+        <InfoTooltip
+          isOpen
+          onClose={closeAllPopups}
+          onLoginClick={handleLoginClick}
+        />
+      )}
     </div>
   );
 }

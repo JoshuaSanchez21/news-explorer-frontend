@@ -24,22 +24,11 @@ function useFormWithValidation(initialValues = {}) {
     }
   }
 
-  function resetForm(
-    nextValues = initialValues,
-    nextErrors = {},
-    nextIsValid = false,
-  ) {
-    setValues(nextValues);
-    setErrors(nextErrors);
-    setIsValid(nextIsValid);
-  }
-
   return {
     values,
     errors,
     isValid,
     handleChange,
-    resetForm,
   };
 }
 

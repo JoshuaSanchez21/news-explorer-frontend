@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard.jsx";
 
 function NewsCardList({ articles }) {
   const [visibleCount, setVisibleCount] = useState(3);
-
-  useEffect(() => {
-    setVisibleCount(3);
-  }, [articles]);
 
   function handleShowMore() {
     setVisibleCount((currentCount) => currentCount + 3);

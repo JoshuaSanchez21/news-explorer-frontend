@@ -7,7 +7,7 @@
 
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("../../images/main-background.jpg");
+    url("../../images/main-background.webp");
 
   background-position: center;
   background-repeat: no-repeat;

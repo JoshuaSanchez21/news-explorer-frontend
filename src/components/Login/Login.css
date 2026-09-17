@@ -95,7 +95,7 @@
 }
 
 .auth-form__server-error {
-  margin: 0 0 8px;
+  margin: -8px 0 8px;
 
   color: #ff0000;
 
