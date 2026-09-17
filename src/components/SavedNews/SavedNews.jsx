@@ -9,7 +9,7 @@ const mockSavedArticles = [
   // conserva aquí los tres objetos anteriores
 ];
 
-function SavedNews() {
+function SavedNews({ onLoginClick }) {
   const keywordCounts = mockSavedArticles.reduce((counts, article) => {
     counts[article.keyword] = (counts[article.keyword] || 0) + 1;
 
@@ -22,7 +22,7 @@ function SavedNews() {
 
   return (
     <main className="saved-news">
-      <Header theme="dark" />
+      <Header theme="dark" onLoginClick={onLoginClick} />
 
       <SavedNewsHeader
         userName="Joshua"

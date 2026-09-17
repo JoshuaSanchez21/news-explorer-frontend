@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 
-function Navigation({ theme = "light", isMenuOpen, onNavigate }) {
+function Navigation({ theme = "light", isMenuOpen, onNavigate, onLoginClick }) {
   return (
     <nav
       className={`navigation navigation_theme_${theme} ${
@@ -28,7 +28,14 @@ function Navigation({ theme = "light", isMenuOpen, onNavigate }) {
         Artículos guardados
       </NavLink>
 
-      <button className="navigation__login-button" type="button">
+      <button
+        className="navigation__login-button"
+        type="button"
+        onClick={() => {
+          onNavigate();
+          onLoginClick();
+        }}
+      >
         Iniciar sesión
       </button>
     </nav>

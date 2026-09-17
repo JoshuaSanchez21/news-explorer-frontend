@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 import Navigation from "../Navigation/Navigation.jsx";
 
-function Header({ theme = "light" }) {
+function Header({ theme = "light", onLoginClick }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function handleMenuToggle() {
@@ -38,6 +38,7 @@ function Header({ theme = "light" }) {
           theme={theme}
           isMenuOpen={isMenuOpen}
           onNavigate={() => setIsMenuOpen(false)}
+          onLoginClick={onLoginClick}
         />
       </div>
 

@@ -11,7 +11,7 @@ import NothingFound from "../NothingFound/NothingFound.jsx";
 
 import { getNews } from "../../utils/NewsApi.js";
 
-function Main() {
+function Main({ onLoginClick }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
@@ -85,7 +85,7 @@ function Main() {
   return (
     <main className="main">
       <section className="main__hero">
-        <Header theme="light" />
+        <Header theme="light" onLoginClick={onLoginClick} />
 
         <div className="main__hero-content">
           <h1 className="main__title">
