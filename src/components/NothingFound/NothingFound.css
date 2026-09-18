@@ -1,0 +1,83 @@
+.nothing-found {
+  min-height: 374px;
+  padding: 80px 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #f5f6f7;
+
+  text-align: center;
+}
+
+.nothing-found__icon {
+  position: relative;
+
+  width: 96px;
+  height: 96px;
+}
+
+.nothing-found__circle {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+
+  width: 56px;
+  height: 56px;
+
+  border: 1px solid #d1d2d6;
+  border-radius: 50%;
+}
+
+.nothing-found__circle::before {
+  content: "";
+
+  position: absolute;
+  right: -15px;
+  bottom: 2px;
+
+  width: 24px;
+  height: 1px;
+
+  background-color: #d1d2d6;
+
+  transform: rotate(45deg);
+  transform-origin: left center;
+}
+
+.nothing-found__circle::after {
+  content: "";
+
+  position: absolute;
+  top: 26px;
+  left: 15px;
+
+  width: 26px;
+  height: 1px;
+
+  background-color: #d1d2d6;
+}
+
+.nothing-found__title {
+  margin: 24px 0 0;
+
+  color: #1a1b22;
+
+  font-family: "Roboto Slab", Georgia, serif;
+  font-size: 26px;
+  line-height: 30px;
+  font-weight: 400;
+}
+
+.nothing-found__text {
+  max-width: 356px;
+  margin: 16px 0 0;
+
+  color: #b6bcbf;
+
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+}
