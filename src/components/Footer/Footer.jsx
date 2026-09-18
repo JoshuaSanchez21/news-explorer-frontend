@@ -1,5 +1,6 @@
 import "./Footer.css";
 import facebookIcon from "../../images/facebook.svg";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -8,9 +9,9 @@ function Footer() {
 
       <div className="footer__content">
         <nav className="footer__navigation">
-          <a className="footer__link" href="/">
+          <Link className="footer__link" to="/">
             Inicio
-          </a>
+          </Link>
 
           <a
             className="footer__link"
@@ -42,7 +43,11 @@ function Footer() {
             rel="noreferrer"
             aria-label="Facebook"
           >
-            <img className="footer__social-icon" src={facebookIcon} alt="" />
+            <img
+              className="footer__social-icon"
+              src={facebookIcon}
+              alt="Facebook"
+            />
           </a>
         </div>
       </div>

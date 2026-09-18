@@ -11,8 +11,6 @@ function formatDate(dateString) {
 }
 
 function NewsCard({ article, isSaved = false, onDelete }) {
-  function handleSaveClick() {}
-
   return (
     <article className="news-card">
       <div className="news-card__image-container">
@@ -47,7 +45,6 @@ function NewsCard({ article, isSaved = false, onDelete }) {
                 className="news-card__save-button"
                 type="button"
                 aria-label="Guardar artículo"
-                onClick={handleSaveClick}
               >
                 <svg
                   className="news-card__save-icon"

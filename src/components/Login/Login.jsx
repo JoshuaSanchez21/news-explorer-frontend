@@ -14,8 +14,6 @@ function Login({ isOpen, onClose, onRegisterClick }) {
     if (!isValid) {
       return;
     }
-
-    console.log("Login:", values);
   }
 
   return (

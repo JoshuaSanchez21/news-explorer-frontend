@@ -36,6 +36,7 @@ function SearchForm({ onSearch }) {
           placeholder="Introduce un tema"
           value={keyword}
           onChange={handleChange}
+          required
         />
 
         {error && <span className="search-form__error">{error}</span>}

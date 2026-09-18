@@ -1,5 +1,4 @@
-const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-const BASE_URL = "https://newsapi.org/v2";
+import { NEWS_API_BASE_URL, NEWS_API_KEY } from "./constants.js";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -23,15 +22,12 @@ export function getNews(keyword) {
   const to = formatDate(today);
 
   const url =
-    `${BASE_URL}/everything?` +
+    `${NEWS_API_BASE_URL}/everything?` +
     `q=${encodeURIComponent(keyword)}` +
     `&from=${from}` +
     `&to=${to}` +
     `&pageSize=100` +
-    `&apiKey=${API_KEY}`;
+    `&apiKey=${NEWS_API_KEY}`;
 
   return fetch(url).then(checkResponse);
 }
-
-// Prueba temporal
-// getNews("technology").then(console.log).catch(console.error);

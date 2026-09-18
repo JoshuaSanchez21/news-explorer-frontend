@@ -18,7 +18,7 @@
 .main__hero-content {
   width: min(100% - 40px, 608px);
   margin: 0 auto;
-  padding-top: 80px;
+  padding-top: 160px;
 }
 
 .main__title {
@@ -62,7 +62,7 @@
 
   .main__hero-content {
     width: 452px;
-    padding-top: 38px;
+    padding-top: 104px;
   }
 
   .main__title {

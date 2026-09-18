@@ -1,4 +1,10 @@
 .header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+
+  width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -25,6 +31,7 @@
 }
 
 .header_theme_dark {
+  position: relative;
   border-bottom: 1px solid #d1d2d6;
 }
 
