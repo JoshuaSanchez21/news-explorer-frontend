@@ -1,0 +1,30 @@
+.info-tooltip {
+  padding: 2px 0 18px;
+}
+
+.info-tooltip__title {
+  max-width: 315px;
+  margin: 0;
+
+  color: #1a1b22;
+
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 900;
+}
+
+.info-tooltip__login {
+  margin-top: 14px;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  color: #2f71e5;
+
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+
+  cursor: pointer;
+}

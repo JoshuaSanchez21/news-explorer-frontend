@@ -1,0 +1,27 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  color: #1a1b22;
+  background-color: #fff;
+}
+
+button,
+a,
+input {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
