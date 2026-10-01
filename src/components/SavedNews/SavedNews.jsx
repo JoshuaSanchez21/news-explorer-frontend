@@ -1,3 +1,4 @@
+import { useContext, useEffect, useState } from "react";
 import "./SavedNews.css";
 
 import Header from "../Header/Header.jsx";
@@ -5,50 +6,68 @@ import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader.jsx";
 import NewsCard from "../NewsCard/NewsCard.jsx";
 import Footer from "../Footer/Footer.jsx";
 
-const mockSavedArticles = [
-  {
-    _id: "1",
-    keyword: "Tecnología",
-    title: "La tecnología continúa transformando la vida cotidiana",
-    description:
-      "Nuevas herramientas digitales siguen cambiando la manera en que trabajamos, aprendemos y nos comunicamos.",
-    publishedAt: "2026-09-15T12:00:00Z",
-    url: "https://example.com/technology-1",
-    urlToImage: "https://images.unsplash.com/photo-1518770660439-4636190af475",
-    source: {
-      name: "Technology Daily",
-    },
-  },
-  {
-    _id: "2",
-    keyword: "Ciencia",
-    title: "Nuevos avances impulsan la investigación científica",
-    description:
-      "Equipos internacionales trabajan en nuevas tecnologías y métodos para acelerar descubrimientos científicos.",
-    publishedAt: "2026-09-14T10:30:00Z",
-    url: "https://example.com/science-1",
-    urlToImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d",
-    source: {
-      name: "Science Journal",
-    },
-  },
-  {
-    _id: "3",
-    keyword: "Tecnología",
-    title: "La inteligencia artificial llega a más sectores",
-    description:
-      "Empresas y organizaciones están incorporando nuevas aplicaciones de inteligencia artificial en sus operaciones.",
-    publishedAt: "2026-09-13T08:15:00Z",
-    url: "https://example.com/technology-2",
-    urlToImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
-    source: {
-      name: "Digital News",
-    },
-  },
-];
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import { deleteArticle, getSavedArticles } from "../../utils/MainApi.js";
 
 function SavedNews({ onLoginClick }) {
-  const keywordCounts = mockSavedArticles.reduce((counts, article) => {
+  const { currentUser } = useContext(CurrentUserContext);
+
+  const [savedArticles, setSavedArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+
+    if (!token) {
+      return;
+    }
+
+    getSavedArticles(token)
+      .then((articles) => {
+        const formattedArticles = articles.map((article) => ({
+          ...article,
+          description: article.text,
+          publishedAt: article.date,
+          url: article.link,
+          urlToImage: article.image,
+          source: {
+            name: article.source,
+          },
+        }));
+
+        setSavedArticles(formattedArticles);
+        setLoadError("");
+      })
+      .catch(() => {
+        setLoadError("No se pudieron cargar los artículos guardados.");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  function handleDeleteArticle(article) {
+    const token = localStorage.getItem("jwt");
+
+    if (!token) {
+      return;
+    }
+
+    deleteArticle(article._id, token)
+      .then(() => {
+        setSavedArticles((currentArticles) =>
+          currentArticles.filter(
+            (currentArticle) => currentArticle._id !== article._id,
+          ),
+        );
+      })
+      .catch(() => {
+        setLoadError("No se pudo eliminar el artículo guardado.");
+      });
+  }
+
+  const keywordCounts = savedArticles.reduce((counts, article) => {
     counts[article.keyword] = (counts[article.keyword] || 0) + 1;
 
     return counts;
@@ -64,16 +83,27 @@ function SavedNews({ onLoginClick }) {
 
       <main className="saved-news__main">
         <SavedNewsHeader
-          userName="Joshua"
-          articlesCount={mockSavedArticles.length}
+          userName={currentUser?.name || "Usuario"}
+          articlesCount={savedArticles.length}
           keywords={sortedKeywords}
         />
 
         <section className="saved-news__articles">
           <div className="saved-news__grid">
-            {mockSavedArticles.map((article) => (
-              <NewsCard key={article._id} article={article} isSaved />
-            ))}
+            {isLoading && <p>Cargando artículos guardados...</p>}
+
+            {!isLoading && loadError && <p>{loadError}</p>}
+
+            {!isLoading &&
+              !loadError &&
+              savedArticles.map((article) => (
+                <NewsCard
+                  key={article._id}
+                  article={article}
+                  isSaved
+                  onDelete={handleDeleteArticle}
+                />
+              ))}
           </div>
         </section>
       </main>
