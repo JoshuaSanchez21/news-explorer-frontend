@@ -105,6 +105,24 @@
   stroke: #1a1b22;
 }
 
+.news-card__save-button_active .news-card__save-icon {
+  fill: #2f71e5;
+  stroke: #2f71e5;
+}
+
+.news-card__save-button_active:hover .news-card__save-icon {
+  fill: #2f71e5;
+  stroke: #2f71e5;
+}
+
+.news-card__save-button:disabled {
+  cursor: default;
+}
+
+.news-card__save-button:disabled:hover .news-card__save-icon {
+  stroke: #b6bcbf;
+}
+
 .news-card__tooltip {
   display: none;
 

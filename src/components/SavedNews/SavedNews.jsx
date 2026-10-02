@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import "./SavedNews.css";
 
 import Header from "../Header/Header.jsx";
@@ -7,65 +7,9 @@ import NewsCard from "../NewsCard/NewsCard.jsx";
 import Footer from "../Footer/Footer.jsx";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
-import { deleteArticle, getSavedArticles } from "../../utils/MainApi.js";
 
-function SavedNews({ onLoginClick }) {
+function SavedNews({ onLoginClick, savedArticles, onDeleteArticle }) {
   const { currentUser } = useContext(CurrentUserContext);
-
-  const [savedArticles, setSavedArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadError, setLoadError] = useState("");
-
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-
-    if (!token) {
-      return;
-    }
-
-    getSavedArticles(token)
-      .then((articles) => {
-        const formattedArticles = articles.map((article) => ({
-          ...article,
-          description: article.text,
-          publishedAt: article.date,
-          url: article.link,
-          urlToImage: article.image,
-          source: {
-            name: article.source,
-          },
-        }));
-
-        setSavedArticles(formattedArticles);
-        setLoadError("");
-      })
-      .catch(() => {
-        setLoadError("No se pudieron cargar los artículos guardados.");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
-  function handleDeleteArticle(article) {
-    const token = localStorage.getItem("jwt");
-
-    if (!token) {
-      return;
-    }
-
-    deleteArticle(article._id, token)
-      .then(() => {
-        setSavedArticles((currentArticles) =>
-          currentArticles.filter(
-            (currentArticle) => currentArticle._id !== article._id,
-          ),
-        );
-      })
-      .catch(() => {
-        setLoadError("No se pudo eliminar el artículo guardado.");
-      });
-  }
 
   const keywordCounts = savedArticles.reduce((counts, article) => {
     counts[article.keyword] = (counts[article.keyword] || 0) + 1;
@@ -90,20 +34,14 @@ function SavedNews({ onLoginClick }) {
 
         <section className="saved-news__articles">
           <div className="saved-news__grid">
-            {isLoading && <p>Cargando artículos guardados...</p>}
-
-            {!isLoading && loadError && <p>{loadError}</p>}
-
-            {!isLoading &&
-              !loadError &&
-              savedArticles.map((article) => (
-                <NewsCard
-                  key={article._id}
-                  article={article}
-                  isSaved
-                  onDelete={handleDeleteArticle}
-                />
-              ))}
+            {savedArticles.map((article) => (
+              <NewsCard
+                key={article._id}
+                article={article}
+                isSaved
+                onDelete={onDeleteArticle}
+              />
+            ))}
           </div>
         </section>
       </main>

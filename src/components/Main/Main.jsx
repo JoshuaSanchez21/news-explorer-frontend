@@ -16,6 +16,9 @@ function Main({
   searchError,
   currentSearch,
   onSearch,
+  savedArticles,
+  onSaveArticle,
+  onDeleteArticle,
 }) {
   return (
     <>
@@ -46,7 +49,13 @@ function Main({
         )}
 
         {!isLoading && !searchError && articles.length > 0 && (
-          <NewsCardList key={currentSearch} articles={articles} />
+          <NewsCardList
+            key={currentSearch}
+            articles={articles}
+            savedArticles={savedArticles}
+            onSaveArticle={onSaveArticle}
+            onDeleteArticle={onDeleteArticle}
+          />
         )}
 
         {searchError && (
