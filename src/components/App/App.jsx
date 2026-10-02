@@ -197,7 +197,14 @@ function App() {
 
     getNews(keyword)
       .then((data) => {
-        const receivedArticles = data.articles || [];
+        const receivedArticles = (data.articles || []).filter(
+          (article) =>
+            article.title &&
+            article.publishedAt &&
+            article.url &&
+            article.urlToImage &&
+            article.source?.name,
+        );
 
         setArticles(receivedArticles);
 
