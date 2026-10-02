@@ -24,7 +24,8 @@ function SavedNewsHeader({
       <p className="saved-news-header__label">Artículos guardados</p>
 
       <h1 className="saved-news-header__title">
-        {userName}, tienes {articlesCount} artículos guardados
+        {userName}, tienes {articlesCount}{" "}
+        {articlesCount === 1 ? "artículo guardado" : "artículos guardados"}
       </h1>
 
       <p className="saved-news-header__keywords">

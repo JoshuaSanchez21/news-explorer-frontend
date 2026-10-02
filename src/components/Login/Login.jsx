@@ -1,19 +1,36 @@
+import { useState } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm.jsx";
 import useFormWithValidation from "../../hooks/useFormWithValidation.js";
 import "./Login.css";
 
-function Login({ isOpen, onClose, onRegisterClick }) {
+function Login({ isOpen, onClose, onRegisterClick, onLogin }) {
   const { values, errors, isValid, handleChange } = useFormWithValidation({
     email: "",
     password: "",
   });
 
+  const [serverError, setServerError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (!isValid) {
+    if (!isValid || isSubmitting) {
       return;
     }
+
+    setServerError("");
+    setIsSubmitting(true);
+
+    onLogin(values.email, values.password)
+      .catch((error) => {
+        setServerError(
+          error.message || "Ha ocurrido un error al iniciar sesión",
+        );
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   }
 
   return (
@@ -51,8 +68,16 @@ function Login({ isOpen, onClose, onRegisterClick }) {
           <span className="auth-form__error">{errors.password}</span>
         </label>
 
-        <button className="auth-form__submit" type="submit" disabled={!isValid}>
-          Iniciar sesión
+        {serverError && (
+          <p className="auth-form__server-error">{serverError}</p>
+        )}
+
+        <button
+          className="auth-form__submit"
+          type="submit"
+          disabled={!isValid || isSubmitting}
+        >
+          {isSubmitting ? "Iniciando..." : "Iniciar sesión"}
         </button>
 
         <p className="auth-form__switch">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm.jsx";
 import useFormWithValidation from "../../hooks/useFormWithValidation.js";
+import { register } from "../../utils/MainApi.js";
 import "./Register.css";
 
 function Register({ isOpen, onClose, onLoginClick, onSuccess }) {
@@ -11,23 +12,30 @@ function Register({ isOpen, onClose, onLoginClick, onSuccess }) {
   });
 
   const [serverError, setServerError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (!isValid) {
+    if (!isValid || isSubmitting) {
       return;
     }
 
     setServerError("");
+    setIsSubmitting(true);
 
-    // Temporal hasta conectar POST /signup
-    if (values.email.toLowerCase() === "existing@example.com") {
-      setServerError("Este correo electrónico no está disponible");
-      return;
-    }
-
-    onSuccess();
+    register(values.email, values.password, values.name)
+      .then(() => {
+        onSuccess();
+      })
+      .catch((error) => {
+        setServerError(
+          error.message || "Ha ocurrido un error durante el registro",
+        );
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   }
 
   return (
@@ -87,8 +95,12 @@ function Register({ isOpen, onClose, onLoginClick, onSuccess }) {
           <p className="auth-form__server-error">{serverError}</p>
         )}
 
-        <button className="auth-form__submit" type="submit" disabled={!isValid}>
-          Inscribirse
+        <button
+          className="auth-form__submit"
+          type="submit"
+          disabled={!isValid || isSubmitting}
+        >
+          {isSubmitting ? "Registrando..." : "Inscribirse"}
         </button>
 
         <p className="auth-form__switch">
