@@ -1,16 +1,68 @@
-# React + Vite
+# News Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+News Explorer es una aplicación web full stack que permite buscar noticias por palabra clave, registrarse e iniciar sesión, y guardar artículos en una cuenta personal.
 
-Currently, two official plugins are available:
+## Aplicación desplegada
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Frontend:
 
-## React Compiler
+https://www.news-explorer-joshua21.mooo.com
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+API:
 
-## Expanding the ESLint configuration
+https://news-explorer-api-joshua21.mooo.com
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Funcionalidades
+
+- Búsqueda de noticias mediante una API externa.
+- Visualización de resultados en tarjetas.
+- Persistencia de la última búsqueda.
+- Registro de usuarios.
+- Inicio y cierre de sesión.
+- Autenticación mediante JWT.
+- Persistencia de sesión al recargar la página.
+- Ruta protegida para artículos guardados.
+- Guardar artículos en la cuenta del usuario.
+- Eliminar artículos guardados.
+- Estado visual del marcador de artículos.
+- Página de artículos guardados con contador y palabras clave.
+- Diseño responsive para escritorio, tablet y móvil.
+
+## Tecnologías utilizadas
+
+- React
+- Vite
+- React Router
+- JavaScript
+- HTML
+- CSS
+- Fetch API
+- Local Storage
+- Node.js
+- Express
+- MongoDB
+- JWT
+- Nginx
+- Google Cloud
+
+## Backend
+
+Repositorio del backend:
+
+https://github.com/JoshuaSanchez21/news-explorer-backend
+
+La API proporciona las rutas necesarias para:
+
+- Registro e inicio de sesión.
+- Obtención de la información del usuario.
+- Obtención de artículos guardados.
+- Creación de artículos guardados.
+- Eliminación de artículos guardados.
+
+## Ejecución local
+
+Instala las dependencias:
+
+```bash
+npm install
+```
