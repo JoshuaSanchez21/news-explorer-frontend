@@ -7,20 +7,23 @@ function About() {
       <img
         className="about__image"
         src={authorImage}
-        alt="Autor de News Explorer"
+        alt="Joshua Sánchez, desarrollador de News Explorer"
       />
 
       <div className="about__content">
         <h2 className="about__title">Acerca del autor</h2>
 
         <p className="about__text">
-          Este bloque describe al autor del proyecto. Aquí debe indicar tu
-          nombre, a qué te dedicas y qué tecnologías de desarrollo conoces.
+          Soy Joshua Sánchez, desarrollador web enfocado en crear aplicaciones
+          funcionales, responsivas y fáciles de usar. Trabajo con tecnologías
+          como JavaScript, React, Node.js, Express y MongoDB.
         </p>
 
         <p className="about__text">
-          También puedes hablar de tu experiencia con Practicum, de lo que
-          aprendiste allí y de cómo puedes ayudar a los clientes potenciales.
+          News Explorer forma parte de mi formación en desarrollo web y reúne
+          conceptos como consumo de APIs, autenticación con JWT, persistencia de
+          datos, diseño responsive y despliegue de una aplicación full stack en
+          la nube.
         </p>
       </div>
     </section>

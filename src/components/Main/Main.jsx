@@ -10,6 +10,7 @@ import NothingFound from "../NothingFound/NothingFound.jsx";
 
 function Main({
   onLoginClick,
+  onRegisterClick,
   articles,
   isLoading,
   hasSearched,
@@ -55,6 +56,7 @@ function Main({
             savedArticles={savedArticles}
             onSaveArticle={onSaveArticle}
             onDeleteArticle={onDeleteArticle}
+            onRegisterClick={onRegisterClick}
           />
         )}
 

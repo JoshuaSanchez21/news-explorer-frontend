@@ -241,6 +241,7 @@ function App() {
             element={
               <Main
                 onLoginClick={handleLoginClick}
+                onRegisterClick={handleRegisterClick}
                 articles={articles}
                 isLoading={isLoading}
                 hasSearched={hasSearched}

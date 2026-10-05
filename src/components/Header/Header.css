@@ -72,19 +72,15 @@
   }
 
   .header__container {
+    width: 100%;
+    min-height: 56px;
+    padding: 0 16px;
     position: relative;
     z-index: 11;
   }
 
-  .header {
-    position: relative;
-    z-index: 10;
-  }
-
-  .header__container {
-    width: 100%;
-    min-height: 56px;
-    padding: 0 16px;
+  .header_menu-open .header__container {
+    background-color: #1a1b22;
   }
 
   .header__logo {

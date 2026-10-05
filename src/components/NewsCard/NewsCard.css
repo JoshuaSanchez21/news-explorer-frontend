@@ -124,6 +124,9 @@
 }
 
 .news-card__tooltip {
+  border: 0;
+  cursor: pointer;
+
   display: none;
 
   padding: 12px;

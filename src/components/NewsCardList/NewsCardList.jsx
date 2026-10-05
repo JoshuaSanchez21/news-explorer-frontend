@@ -7,6 +7,7 @@ function NewsCardList({
   savedArticles,
   onSaveArticle,
   onDeleteArticle,
+  onRegisterClick,
 }) {
   const [visibleCount, setVisibleCount] = useState(3);
 
@@ -36,6 +37,7 @@ function NewsCardList({
                 savedArticle={savedArticle}
                 onSave={onSaveArticle}
                 onDelete={onDeleteArticle}
+                onRegisterClick={onRegisterClick}
               />
             );
           })}

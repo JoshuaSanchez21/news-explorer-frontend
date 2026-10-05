@@ -19,6 +19,7 @@ function NewsCard({
   savedArticle,
   onSave,
   onDelete,
+  onRegisterClick,
 }) {
   const { loggedIn } = useContext(CurrentUserContext);
 
@@ -66,9 +67,13 @@ function NewsCard({
           {!isSaved && (
             <>
               {!loggedIn && (
-                <span className="news-card__tooltip">
+                <button
+                  className="news-card__tooltip"
+                  type="button"
+                  onClick={onRegisterClick}
+                >
                   Inicia sesión para guardar artículos
-                </span>
+                </button>
               )}
 
               <button
