@@ -10,12 +10,16 @@ import NothingFound from "../NothingFound/NothingFound.jsx";
 
 function Main({
   onLoginClick,
+  onRegisterClick,
   articles,
   isLoading,
   hasSearched,
   searchError,
   currentSearch,
   onSearch,
+  savedArticles,
+  onSaveArticle,
+  onDeleteArticle,
 }) {
   return (
     <>
@@ -46,7 +50,14 @@ function Main({
         )}
 
         {!isLoading && !searchError && articles.length > 0 && (
-          <NewsCardList key={currentSearch} articles={articles} />
+          <NewsCardList
+            key={currentSearch}
+            articles={articles}
+            savedArticles={savedArticles}
+            onSaveArticle={onSaveArticle}
+            onDeleteArticle={onDeleteArticle}
+            onRegisterClick={onRegisterClick}
+          />
         )}
 
         {searchError && (

@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import "./NewsCard.css";
 
 function formatDate(dateString) {
@@ -10,7 +12,34 @@ function formatDate(dateString) {
   }).format(date);
 }
 
-function NewsCard({ article, isSaved = false, onDelete }) {
+function NewsCard({
+  article,
+  isSaved = false,
+  isArticleSaved = false,
+  savedArticle,
+  onSave,
+  onDelete,
+  onRegisterClick,
+}) {
+  const { loggedIn } = useContext(CurrentUserContext);
+
+  function handleSaveClick() {
+    if (!loggedIn) {
+      return;
+    }
+
+    if (isArticleSaved) {
+      onDelete?.(savedArticle);
+      return;
+    }
+
+    onSave?.(article);
+  }
+
+  function handleDeleteClick() {
+    onDelete?.(article);
+  }
+
   return (
     <article className="news-card">
       <div className="news-card__image-container">
@@ -37,14 +66,28 @@ function NewsCard({ article, isSaved = false, onDelete }) {
         <div className="news-card__action-container">
           {!isSaved && (
             <>
-              <span className="news-card__tooltip">
-                Inicia sesión para guardar artículos
-              </span>
+              {!loggedIn && (
+                <button
+                  className="news-card__tooltip"
+                  type="button"
+                  onClick={onRegisterClick}
+                >
+                  Inicia sesión para guardar artículos
+                </button>
+              )}
 
               <button
-                className="news-card__save-button"
+                className={`news-card__save-button ${
+                  isArticleSaved ? "news-card__save-button_active" : ""
+                }`}
                 type="button"
-                aria-label="Guardar artículo"
+                aria-label={
+                  isArticleSaved
+                    ? "Eliminar artículo guardado"
+                    : "Guardar artículo"
+                }
+                disabled={!loggedIn}
+                onClick={handleSaveClick}
               >
                 <svg
                   className="news-card__save-icon"
@@ -62,11 +105,7 @@ function NewsCard({ article, isSaved = false, onDelete }) {
               className="news-card__delete-button"
               type="button"
               aria-label="Eliminar artículo guardado"
-              onClick={() => {
-                if (onDelete) {
-                  onDelete(article);
-                }
-              }}
+              onClick={handleDeleteClick}
             >
               <span className="news-card__delete-icon" />
             </button>

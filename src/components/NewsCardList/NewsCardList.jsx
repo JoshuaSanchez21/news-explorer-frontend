@@ -2,7 +2,13 @@ import { useState } from "react";
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard.jsx";
 
-function NewsCardList({ articles }) {
+function NewsCardList({
+  articles,
+  savedArticles,
+  onSaveArticle,
+  onDeleteArticle,
+  onRegisterClick,
+}) {
   const [visibleCount, setVisibleCount] = useState(3);
 
   function handleShowMore() {
@@ -18,9 +24,23 @@ function NewsCardList({ articles }) {
         <h2 className="news-card-list__title">Resultados de búsqueda</h2>
 
         <div className="news-card-list__grid">
-          {visibleArticles.map((article, index) => (
-            <NewsCard key={`${article.url}-${index}`} article={article} />
-          ))}
+          {visibleArticles.map((article, index) => {
+            const savedArticle = savedArticles.find(
+              (item) => item.url === article.url,
+            );
+
+            return (
+              <NewsCard
+                key={`${article.url}-${index}`}
+                article={article}
+                isArticleSaved={Boolean(savedArticle)}
+                savedArticle={savedArticle}
+                onSave={onSaveArticle}
+                onDelete={onDeleteArticle}
+                onRegisterClick={onRegisterClick}
+              />
+            );
+          })}
         </div>
 
         {hasMoreArticles && (
